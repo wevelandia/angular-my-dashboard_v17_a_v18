@@ -1,0 +1,39 @@
+
+<app-title title="Defer View / Blocks" />
+
+<section class="grid grid-cols-1">
+
+  <!-- Aca usamos el HeavyLoadersSlowComponent -->
+  <!-- <app-heavy-loaders-slow /> -->
+
+  <!-- <app-heavy-loaders-slow /> -->
+  <!-- Con @defer por lo menos no se queda la aplicación en blanco -->
+  <!-- Se puede colocar un placeholder para mostrar al usuario que esta cargando ese componente pesado. -->
+  <!-- Si definimos varios defer en la misma pagina, se ejecuta primero uno y despues otro solo que no se puede hacer scroll por el momento, pero ello se soluciona de otra manera -->
+  @defer() {
+    <app-heavy-loaders-slow cssClass="bg-blue-500" />
+  }@placeholder {
+    <p class="h-[600px] w-full bg-gradient-to-r from-gray-200 to-gray-400 animate-pulse">
+      Cargando...
+    </p>
+  }
+
+  @defer(on idle) {
+    <app-heavy-loaders-slow cssClass="bg-green-500" />
+  }@placeholder {
+    <p class="h-[600px] w-full bg-gradient-to-r from-gray-200 to-gray-400 animate-pulse">
+      Cargando...
+    </p>
+  }
+
+  <!-- Este tercer defer ingresa a funcionar para cuando se ve en el viewport, tengo que dar scroll e ir hasta el sitio y se activa. -->
+  @defer(on viewport) {
+    <app-heavy-loaders-slow cssClass="bg-purple-500" />
+  }@placeholder {
+    <p class="h-[600px] w-full bg-gradient-to-r from-gray-200 to-gray-400 animate-pulse">
+      Cargando...
+    </p>
+  }
+
+
+</section>

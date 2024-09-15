@@ -1,0 +1,84 @@
+ <!-- Acá implementamos o llamamos el componente title -->
+ <!-- Mandamos otro parametro withShadow -->
+ <app-title title="Control Flow" withShadow></app-title>
+
+<section class="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+  <!-- ngInf @if -->
+  <div class="bg-white rounded shadow p-10">
+
+    <h2 class="text-2xl font-bold mb-5">if: {{ showContent() }}</h2>
+
+    <button
+      class="p-2 bg-blue-500 rounded text-white"
+      (click)="toggleContent()">
+      Click me!
+    </button>
+
+    <!-- Vamos a usar el nuevo control flow -->
+    @if( showContent() ) {
+      <p>Hola Mundo</p>
+    } @else {
+      <p>**********</p>
+    }
+
+  </div>
+
+  <!-- @switch -->
+  <div class="bg-white rounded shadow p-10">
+
+    <h2 class="text-3xl">{{ grade() }}</h2>
+
+    @switch ( grade() ) {
+      @case ('A') {
+        <p>Arriba de 90</p>
+      }
+      @case ('B') {
+        <p>Arriba de 80</p>
+      }
+      @default {
+        <p>Reprobado</p>
+      }
+    }
+
+  </div>
+
+  <!-- @for -->
+  <div class="bg-white rounded shadow p-10">
+
+    <ul>
+      <!-- Aca el track (track $index) tambien se puede usar asi: track framework -> Pero siempre y cuando sean unicos los valores   -->
+      <!-- @for tiene mas funcionalidades asi como se colocaron en la siguiente linea. -->
+      <!-- Ahora ya podemos utilizar @if antes de iterar los elementos. -->
+      @for (framework of frameworks(); track framework; let i = $index, first = $first, last = $last, even = $even, odd = $odd, count = $count) {
+        <!-- Vamos a utilizar esas variables para darle formato,
+             Me pone en rojo si es par y no es el primero y tampoco es el ultimo -->
+        <li [class]="{
+          'bg-red-100': even && !first && !last,
+          'bg-purple-100': odd && !first && !last,
+          'bg-blue-100': first || last,
+        }">
+          {{ i + 1 }}/{{ count }} - {{ framework }}
+        </li>
+      }
+    </ul>
+
+  </div>
+
+  <div class="bg-white rounded shadow p-10">
+    <!-- Esto lo realizamos es para mostrarle al usuario un mensaje si el arreglo esta vacio. -->
+    <ul>
+      <!-- Aca el track tambien se puede usar asi: track framework -> Pero siempre y cuando sean unicos los valores   -->
+      @for (framework of frameworks2(); track $index) {
+        <li>{{ framework }}</li>
+      } @empty {
+        <li>No hay frameworks agregados</li>
+      }
+    </ul>
+
+  </div>
+
+
+</section>
+
+

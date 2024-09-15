@@ -1,0 +1,134 @@
+<app-title title="Defer Triggers" />
+
+<section>
+
+  <h1 class="text-xl">Interacciones</h1>
+  <hr class="my-2">
+
+  <!-- Con este defer se carga el componente y luego este elemento -->
+  <!-- En @defer el valor de on interaction me permite demorar la creación del componente hasta que no interactue. -->
+  <!-- esto es muy util hasta que el usuario quiera crear el componente -->
+  @defer (on interaction) {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <!-- Este parrafo se ve porque alli en heavy-loaders-fast-component se le adiciono <ng-content></ng-content>-->
+      <span>On Interaction</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <div class="w-full h-20 bg-purple-100">
+      Click en el div
+    </div>
+  }
+
+</section>
+
+<!-- Ahora esta carga va a suceder es cuando por otro proceso se carga -->
+<section>
+  <hr class="my-2">
+
+  <button
+    #btnInteraction
+    class="p-2 bg-blue-500 hover:bg-blue-700 transition-all rounded text-white my-2">
+    Click me!
+  </button>
+
+  <!-- Con este defer se carga el componente y luego este elemento -->
+  <!-- En @defer el valor de on interaction me permite demorar la creación del componente hasta que no interactue. -->
+  <!-- esto es muy util hasta que el usuario quiera crear el componente -->
+  <!-- Aca se delega la interacción al Boton -->
+  @defer (on interaction( btnInteraction )) {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <!-- Este parrafo se ve porque alli en heavy-loaders-fast-component se le adiciono <ng-content></ng-content>-->
+      <span>On Interaction</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <div class="w-full h-20 bg-purple-100">
+      Placeholder div
+    </div>
+  }
+
+</section>
+
+
+<section>
+  <hr class="my-2">
+  <!-- Con este defer se carga el componente y luego este elemento -->
+  <!-- En @defer el valor de on interaction me permite demorar la creación del componente hasta que no interactue. -->
+  <!-- esto es muy util hasta que el usuario quiera crear el componente -->
+  <!-- Con esta linea se delega la interacción cuando pase el mouse sobre el boton
+     on hover(btnInteraction)
+  -->
+  @defer (on hover) {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <!-- Este parrafo se ve porque alli en heavy-loaders-fast-component se le adiciono <ng-content></ng-content>-->
+      <span>On Interaction</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <div class="w-full h-20 bg-purple-100">
+      Placeholder div
+    </div>
+  }
+
+</section>
+
+
+<section>
+  <hr class="my-2">
+  <!-- Con este defer se carga el componente y luego este elemento -->
+  <!-- En @defer el valor de on interaction me permite demorar la creación del componente hasta que no interactue. -->
+  <!-- esto es muy util hasta que el usuario quiera crear el componente -->
+
+  <!-- on inmediate - Funciona que tan pronto pueda cree este componente -->
+  @defer (on immediate) {
+    <app-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <!-- Este parrafo se ve porque alli en heavy-loaders-fast-component se le adiciono <ng-content></ng-content>-->
+      <span>On Immediate</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <div class="w-full h-20 bg-purple-100">
+      Placeholder div
+    </div>
+  }
+
+</section>
+
+
+<section>
+  <hr class="my-2">
+  <!-- Con este defer se carga el componente y luego este elemento -->
+  <!-- En @defer el valor de on interaction me permite demorar la creación del componente hasta que no interactue. -->
+  <!-- esto es muy util hasta que el usuario quiera crear el componente -->
+
+  <!-- on timer(tiempo) - Funciona que tan pronto se cumpla el tiempo cree este componente -->
+  @defer (on timer( 2000 )) {
+    <app-heavy-loaders-fast cssClass="bg-green-500 h-20">
+      <!-- Este parrafo se ve porque alli en heavy-loaders-fast-component se le adiciono <ng-content></ng-content>-->
+      <span>On Timer</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <div class="w-full h-20 bg-purple-100">
+      Placeholder div
+    </div>
+  }
+
+</section>
+
+
+<section>
+  <hr class="my-2">
+  <!-- Con este defer se carga el componente y luego este elemento -->
+  <!-- En @defer el valor de on interaction me permite demorar la creación del componente hasta que no interactue. -->
+  <!-- esto es muy util hasta que el usuario quiera crear el componente -->
+
+  <!-- Aca con prefetch lo que hace es una precarga del código, prepara el código y hasta que pase el hover se ejecuta y muestra el elemento -->
+  @defer (on hover; prefetch on idle) {
+    <app-heavy-loaders-fast cssClass="bg-green-500 h-20">
+      <!-- Este parrafo se ve porque alli en heavy-loaders-fast-component se le adiciono <ng-content></ng-content>-->
+      <span>On hover, idle</span>
+    </app-heavy-loaders-fast>
+  } @placeholder {
+    <div class="w-full h-20 bg-purple-100">
+      Placeholder div
+    </div>
+  }
+
+</section>
