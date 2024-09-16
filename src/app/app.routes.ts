@@ -48,6 +48,16 @@ export const routes: Routes = [
         loadComponent: () => import('./dashboard/pages/view-transition/view-transition2.component'),
       },
       {
+        path: 'inputs-outputs',
+        title: 'Inputs Outputs',
+        loadComponent: () => import('./dashboard/pages/input-output/input-output.component'),
+      },
+      {
+        path: 'Material',
+        title: 'Angular Material',
+        loadComponent: () => import('./dashboard/pages/material/material.component'),
+      },
+      {
         /* Añadimos un comodin */
         path: '',
         redirectTo: 'control-flow',
@@ -57,7 +67,19 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/dashboard',
+    //redirectTo: '/dashboard',
+    // Ahora el redireccionamiento se puede manejar con redirectFunction
+    redirectTo: (route) => {
+      console.log(route);
+
+      // Como es una funcion ahora podemos hacer aca una Inyección, por ejemplo preguntar si esta autenticado para enviarlo a otra pagina y si si lo esta entonces si lo pasamos a donde definimos.
+      // const authService = inject(AuthService)
+      // if (authService) { } else { }
+
+      //return '/dashboard';
+      // Si lo quiero redireccionar a Material
+      return '/dashboard/Material';
+    },
     pathMatch: 'full'
   }
 ];

@@ -2,7 +2,8 @@ import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 /* Esta es la configuración Global de Angular en versiones superiores a la 17 para trabajo con Standalone */
 /* Importamos el viewTransition para que cuando me pase de una pagina a otra esa transición no sea tan abrupta */
@@ -21,8 +22,13 @@ export const appConfig: ApplicationConfig = {
     ),
 
     // Aca importamos de manera tradicional los modulos
-    importProvidersFrom(
-      HttpClientModule
-    ),
+    // Al pasar la aplicación a la version 18, remueve el import asi
+    // que se debe de utilziar otro modulo
+    //importProvidersFrom(
+    //  HttpClientModule
+    //),
+
+    provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync()
+
   ]
 };
